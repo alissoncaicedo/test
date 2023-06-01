@@ -6,9 +6,7 @@ import com.ceiba.biblioteca.servicio.PrestamoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PrestamoControlador {
@@ -23,4 +21,20 @@ public class PrestamoControlador {
             return ResponseEntity.badRequest().body("{\"mensaje\": \"" + e.getMessage() + "\"}");
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Prestamo>buscarPorId(@PathVariable Integer id){
+        try{
+            Prestamo prestamoEncontrado=prestamoServicio.buscarPorId(id);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(prestamoEncontrado);
+        }catch(Exception error){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(null);
+
+        }
+    }
+
 }

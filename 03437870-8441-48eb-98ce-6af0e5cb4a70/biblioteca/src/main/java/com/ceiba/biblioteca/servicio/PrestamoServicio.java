@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class PrestamoServicio implements PrestamoServicioInterface {
@@ -50,9 +51,17 @@ public class PrestamoServicio implements PrestamoServicioInterface {
         return fechaMaximaDevolucion;
     }
 
-
     @Override
-    public Integer buscarPorId(Integer id) throws Exception {
-        return null;
+    public Prestamo buscarPorId(Integer id) throws Exception {
+        try{
+            Optional<Prestamo>prestamoOpcional =prestamoRepositorio.findById(id);
+            if(prestamoOpcional.isPresent()){
+                return prestamoOpcional.get();
+            }else{
+                throw new Exception("Usuario no encontrado");
+            }
+        }catch(Exception error){
+            throw new Exception(error.getMessage());
+        }
     }
 }
