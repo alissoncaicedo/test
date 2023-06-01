@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/03437870-8441-48eb-98ce-6af0e5cb4a70/biblioteca" />
+        <option name="gradleJvm" value="azul-15" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/03437870-8441-48eb-98ce-6af0e5cb4a70/biblioteca" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
