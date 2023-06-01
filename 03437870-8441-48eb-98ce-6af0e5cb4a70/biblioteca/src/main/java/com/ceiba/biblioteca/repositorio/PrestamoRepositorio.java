@@ -10,3 +10,4 @@ public interface PrestamoRepositorio extends JpaRepository<Prestamo, Integer> {
     Prestamo findById(int id);
     boolean existsByIdentificacionUsuario(String identificacionUsuario);
 }
+

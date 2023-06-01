@@ -7,4 +7,5 @@ import java.time.LocalDate;
 public interface PrestamoServicioInterface {
     Prestamo crearPrestamo(Prestamo prestamo) throws Exception;
     LocalDate calcularFechaMaximaDevolucion(Prestamo prestamo);
+    public Integer buscarPorId(Integer id) throws Exception;
 }

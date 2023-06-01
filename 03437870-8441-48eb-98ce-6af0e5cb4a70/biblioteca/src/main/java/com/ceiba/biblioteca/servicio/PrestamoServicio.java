@@ -4,6 +4,7 @@ import com.ceiba.biblioteca.entidad.Prestamo;
 import com.ceiba.biblioteca.repositorio.PrestamoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.DayOfWeek;
 
 import java.time.LocalDate;
 
@@ -16,7 +17,7 @@ public class PrestamoServicio implements PrestamoServicioInterface {
     public Prestamo crearPrestamo(Prestamo prestamo) throws Exception {
         try {
             if (prestamo.getTipoUsuario() == 3 && prestamoRepositorio.existsByIdentificacionUsuario(prestamo.getIdentificacionUsuario())) {
-                throw new IllegalArgumentException("El usuario con identificacion " + prestamo.getIdentificacionUsuario() + "");
+                throw new IllegalArgumentException("El usuario con identificación " + prestamo.getIdentificacionUsuario() + " ya tiene un libro prestado por lo cual no se le puede realizar otro préstamo");
             }
             LocalDate fechaMaximaDevolucion = calcularFechaMaximaDevolucion(prestamo);
             prestamo.setFechaMaximaDevolucion(fechaMaximaDevolucion);
@@ -40,6 +41,18 @@ public class PrestamoServicio implements PrestamoServicioInterface {
         } else {
             throw new IllegalArgumentException("Tipo de usuario no permitido en la biblioteca");
         }
+        if (fechaMaximaDevolucion.getDayOfWeek() == DayOfWeek.SATURDAY) {
+            fechaMaximaDevolucion = fechaMaximaDevolucion.plusDays(2);
+        } else if (fechaMaximaDevolucion.getDayOfWeek() == DayOfWeek.SUNDAY) {
+            fechaMaximaDevolucion = fechaMaximaDevolucion.plusDays(1);
+        }
+
         return fechaMaximaDevolucion;
+    }
+
+
+    @Override
+    public Integer buscarPorId(Integer id) throws Exception {
+        return null;
     }
 }
